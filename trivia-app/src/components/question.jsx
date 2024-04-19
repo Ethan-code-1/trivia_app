@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react'
 import '../answerChoice.css'
 import he from 'he';
+import ButtonGroup from '@mui/material/ButtonGroup';
 
 const Question = ({ question }) => {
 
@@ -53,9 +54,7 @@ const Question = ({ question }) => {
         setClickedRight(key);
 
         //Want to remove the red highlighting of last guess if last guess was wrong as this event will not retrigger it
-        if(lastClickedIndex){
-            setClickedWrong(!lastClickedIndex);
-        }
+        setClickedWrong(null)
 
         //Want to also make it impossible to click
         setIsCorrect(true); 
@@ -65,7 +64,10 @@ const Question = ({ question }) => {
     return (
         <>
             <h3>{he.decode(question.question)}</h3>
-                
+
+            <ButtonGroup variant="outlined" aria-label="Basic button group">
+
+
             {answers.map((answer, index) => (
                 //Will use key to keep track of buttons, when a button is wrong the key will be used to identify it as wrong and then set class accordingly
                 <div key = {index}>
@@ -79,6 +81,7 @@ const Question = ({ question }) => {
                     )}
                 </div>
 ))} 
+</ButtonGroup>
         </>
 
     )
